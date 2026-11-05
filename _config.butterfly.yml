@@ -1,0 +1,140 @@
+# =========================================================
+# Butterfly 主题配置（站点根目录）
+#
+# 只写与主题默认值不同的项，其余沿用 node_modules/hexo-theme-butterfly/_config.yml
+# 主题升级不会覆盖本文件
+# 官方文档：https://butterfly.js.org/
+# =========================================================
+
+# ---------- 导航 ----------
+nav:
+  logo:
+  display_title: true
+  display_post_title: true
+  fixed: false
+
+menu:
+  首页: / || fas fa-home
+  归档: /archives/ || fas fa-archive
+  分类: /categories/ || fas fa-folder-open
+  标签: /tags/ || fas fa-tags
+  关于: /about/ || fas fa-user
+  友链: /links/ || fas fa-link
+
+# ---------- 社交图标 ----------
+social:
+  fab fa-github: "https://github.com/kapi403 || GitHub || #24292e"
+  fas fa-envelope: "mailto:3337409790@qq.com || Email || #4a7dbe"
+
+# ---------- 图像 ----------
+favicon: /img/favicon.ico
+
+avatar:
+  img: /img/avatar.jpg
+  effect: false
+
+disable_top_img: false
+
+# 各页面头图：统一用同一张，换图只改 source/img/banner.jpg
+default_top_img: /img/banner.jpg
+index_img: /img/banner.jpg
+archive_img: /img/banner.jpg
+tag_img: /img/banner.jpg
+category_img: /img/banner.jpg
+
+cover:
+  index_enable: true
+  aside_enable: true
+  archives_enable: true
+  default_cover:
+    - /img/banner.jpg
+
+# ---------- 首页 ----------
+index_site_info_top:
+index_top_img_height:
+
+subtitle:
+  enable: true
+  effect: true
+  typed_option:
+  source: false
+  sub:
+    - 欢迎来到 kapi 的隐秘小屋
+    - 记录一些东西，慢慢写
+    - 作业 / CTF / 折腾日志
+
+index_layout: 3
+
+index_post_content:
+  method: 3
+  length: 500
+
+# ---------- 404 ----------
+error_404:
+  enable: true
+  subtitle: '页面走丢了'
+  background: /img/banner.jpg
+
+# ---------- 搜索（本地搜索，依赖已装的 hexo-generator-searchdb）----------
+search:
+  use: local_search
+  placeholder: 搜索
+  local_search:
+    preload: false
+    top_n_per_article: 1
+    unescape: false
+    pagination:
+      enable: false
+      hitsPerPage: 8
+
+# ---------- 评论（暂未开启）----------
+comments:
+  use:
+
+# ---------- 外观 ----------
+darkmode:
+  enable: true
+  button: true
+  autoChangeMode: false
+
+display_mode: light
+
+preloader:
+  enable: false
+
+# ---------- 页脚 ----------
+footer:
+  owner:
+    enable: true
+    since: 2025
+  copyright:
+    enable: true
+    version: true
+  custom_text: '本站由 <a href="https://hexo.io/">Hexo</a> + <a href="https://butterfly.js.org/">Butterfly</a> 驱动 · 托管于 <a href="https://pages.github.com/">GitHub Pages</a>'
+
+# ---------- 侧边栏 ----------
+aside:
+  enable: true
+  card_author:
+    enable: true
+    description: 记录一些东西，慢慢写
+    button:
+      enable: true
+      icon: fab fa-github
+      text: GitHub
+      link: https://github.com/kapi403
+  card_announcement:
+    enable: true
+    content: 慢慢来，比较快。
+  card_recent_post:
+    enable: true
+    limit: 5
+    sort: date
+
+# ---------- 代码块 ----------
+code_blocks:
+  theme: light
+  macStyle: false
+  copy: true
+  language: true
+  shrink: false
