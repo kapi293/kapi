@@ -1,0 +1,16 @@
+# 友链数据（对应 /links/ 页面，页面 front-matter 需写 type: link）
+- class_name: 友情链接
+  class_desc: 这些人，那些事
+  link_list:
+    - name: kapi 的博客
+      link: https://kapi403.github.io/
+      avatar: /img/avatar.jpg
+      descr: 本站
+    - name: Butterfly 文档
+      link: https://butterfly.js.org/
+      avatar: /img/butterfly-icon.png
+      descr: 主题使用文档
+    - name: Hexo 官方文档
+      link: https://hexo.io/zh-cn/docs/
+      avatar: /img/avatar.jpg
+      descr: 框架文档

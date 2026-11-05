@@ -96,10 +96,10 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: fluid
+theme: butterfly
 
 # Search
-## 供 Fluid 主题的搜索框使用，索引由 hexo-generator-searchdb 生成
+## 本地搜索索引，供主题搜索框使用（hexo-generator-searchdb 生成）
 search:
   path: local-search.xml
   field: post
