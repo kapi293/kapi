@@ -105,3 +105,5 @@ deploy:
   repo: https://github.com/kapi403/kapi403.github.io.git
   branch: gh-pages
   message: 'site: 部署 {{ now("YYYY-MM-DD HH:mm") }}'
+  name: kapi403
+  email: 309079418+kapi403@users.noreply.github.com
