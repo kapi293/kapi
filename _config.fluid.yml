@@ -1,0 +1,115 @@
+# =========================================================
+# Fluid 主题配置（站点根目录）
+#
+# 这里只写「和默认值不同」的项，其余沿用 node_modules/hexo-theme-fluid/_config.yml
+# 好处：主题升级不会覆盖这里的设置
+# 完整配置项参考：https://hexo.fluid-dev.com/docs/guide/
+# =========================================================
+
+# ---------- 导航栏 ----------
+navbar:
+  # 左上角站点名，留空则用 _config.yml 里的 title
+  blog_title: "kapi 的小屋"
+  menu:
+    - { key: "home", link: "/", icon: "iconfont icon-home-fill" }
+    - { key: "archive", link: "/archives/", icon: "iconfont icon-archive-fill" }
+    - { key: "category", link: "/categories/", icon: "iconfont icon-category-fill" }
+    - { key: "tag", link: "/tags/", icon: "iconfont icon-tags-fill" }
+    - { key: "about", link: "/about/", icon: "iconfont icon-user-fill" }
+    - { key: "links", link: "/links/", icon: "iconfont icon-link-fill" }
+
+# ---------- 本地搜索 ----------
+# 依赖 hexo-generator-searchdb，索引文件由 _config.yml 里的 search 段生成
+search:
+  enable: true
+  path: /local-search.xml
+  generate_path: /local-search.xml
+  field: post
+  content: true
+
+# ---------- 首页首屏 ----------
+index:
+  # 头图：把图片放到 source/img/banner.jpg 即可替换
+  banner_img: /img/banner.jpg
+  # 头图高度（屏幕百分比），100 = 整屏
+  banner_img_height: 100
+  # 黑色蒙版不透明度，0.3 左右字才看得清
+  banner_mask_alpha: 0.35
+  slogan:
+    enable: true
+    # 支持列表，每次随机挑一行
+    text:
+      - "欢迎来到 kapi 的隐秘小屋"
+      - "记录一些东西，慢慢写"
+      - "作业 / CTF / 折腾日志"
+
+# ---------- 首页副标题打字机 ----------
+fun_features:
+  typing:
+    enable: true
+    typeSpeed: 70
+    cursorChar: "_"
+    loop: false
+    scope: [home]
+
+# ---------- 其余页面头图 ----------
+archive:
+  banner_img: /img/banner.jpg
+  banner_img_height: 60
+  banner_mask_alpha: 0.35
+
+category:
+  banner_img: /img/banner.jpg
+  banner_img_height: 60
+  banner_mask_alpha: 0.35
+
+tag:
+  banner_img: /img/banner.jpg
+  banner_img_height: 60
+  banner_mask_alpha: 0.35
+
+page:
+  banner_img: /img/banner.jpg
+  banner_img_height: 60
+  banner_mask_alpha: 0.35
+
+page404:
+  banner_img: /img/banner.jpg
+  banner_img_height: 85
+  banner_mask_alpha: 0.35
+
+# ---------- 关于页 ----------
+about:
+  banner_img: /img/banner.jpg
+  banner_img_height: 60
+  banner_mask_alpha: 0.35
+  avatar: /img/avatar.png
+  name: "kapi"
+  intro: "记录一些东西，慢慢写"
+  icons:
+    - { class: "iconfont icon-github-fill", link: "https://github.com/kapi403", tip: "GitHub" }
+    - { class: "iconfont icon-mail-fill", link: "mailto:3337409790@qq.com", tip: "邮箱" }
+
+# ---------- 友链页 ----------
+links:
+  banner_img: /img/banner.jpg
+  banner_img_height: 60
+  banner_mask_alpha: 0.35
+  items:
+    - {
+      title: "kapi 的博客",
+      intro: "本站",
+      link: "https://kapi403.github.io/",
+      avatar: "/img/avatar.png"
+    }
+    - {
+      title: "Fluid 主题文档",
+      intro: "主题使用指南",
+      link: "https://hexo.fluid-dev.com/docs/",
+      avatar: "/img/fluid.png"
+    }
+
+# ---------- 页脚 ----------
+footer:
+  # 自定义页脚内容，支持 HTML
+  content: '本站由 <a href="https://hexo.io/">Hexo</a> 与 <a href="https://github.com/fluid-dev/hexo-theme-fluid">Fluid</a> 驱动 | 托管于 <a href="https://pages.github.com/">GitHub Pages</a>'
