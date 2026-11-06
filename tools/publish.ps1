@@ -9,10 +9,14 @@
     其它任意文件              -> 当作附件放到 /files/
     文件夹                    -> 找里面唯一的 .md 发布
 
+  不想传新文件、只是想重新发布（比如删了文章、改了旧文章）：
+    双击 发布.bat，什么都不输直接回车
+
   发布过程：构建 -> 部署到 GitHub Pages -> 提交源码到 main
 #>
 param(
   [string]$File,
+  [switch]$All,
   [switch]$DryRun,
   [switch]$NoPause
 )
@@ -36,30 +40,38 @@ Write-Host "  kapi 的博客  ·  上传发布" -ForegroundColor DarkCyan
 Write-Host "========================================" -ForegroundColor DarkCyan
 
 # ---------- 1. 收文件 ----------
-if (-not $File) {
+if (-not $All -and -not $File) {
   Write-Host ""
+  Write-Host "  什么都不输直接回车 = 重新发布当前站点（改完/删完文章时用）" -ForegroundColor DarkGray
   $File = Read-Host "把文件拖进来，然后回车"
+  if (-not $File) { $All = $true }
 }
-if (-not $File) { Die "没有收到文件" }
-$File = $File.Trim().Trim('"').Trim("'")
-if (-not (Test-Path -LiteralPath $File)) { Die "找不到：$File" }
 
-$item = Get-Item -LiteralPath $File
-if ($item.PSIsContainer) {
-  $mds = @(Get-ChildItem -LiteralPath $item.FullName -File |
-           Where-Object { $_.Extension -match '^\.(md|markdown|txt)$' })
-  if ($mds.Count -eq 0) { Die "这个文件夹里没有 .md 文件" }
-  if ($mds.Count -gt 1) {
-    Die ("文件夹里有多个文件，请直接拖某一个：" + (($mds | ForEach-Object { $_.Name }) -join ' / '))
+$item = $null
+if (-not $All) {
+  $File = $File.Trim().Trim('"').Trim("'")
+  if (-not (Test-Path -LiteralPath $File)) { Die "找不到：$File" }
+
+  $item = Get-Item -LiteralPath $File
+  if ($item.PSIsContainer) {
+    $mds = @(Get-ChildItem -LiteralPath $item.FullName -File |
+             Where-Object { $_.Extension -match '^\.(md|markdown|txt)$' })
+    if ($mds.Count -eq 0) { Die "这个文件夹里没有 .md 文件" }
+    if ($mds.Count -gt 1) {
+      Die ("文件夹里有多个文件，请直接拖某一个：" + (($mds | ForEach-Object { $_.Name }) -join ' / '))
+    }
+    $item = $mds[0]
   }
-  $item = $mds[0]
-}
 
-$ext = $item.Extension.ToLower()
-$assetDir = $item.DirectoryName
-$kind = 'file'
-if ($ext -match '^\.(md|markdown|txt)$') { $kind = 'article' }
-elseif ($ext -match '^\.(png|jpg|jpeg|gif|webp|svg|ico|bmp)$') { $kind = 'image' }
+  $ext = $item.Extension.ToLower()
+  $assetDir = $item.DirectoryName
+  $kind = 'file'
+  if ($ext -match '^\.(md|markdown|txt)$') { $kind = 'article' }
+  elseif ($ext -match '^\.(png|jpg|jpeg|gif|webp|svg|ico|bmp)$') { $kind = 'image' }
+} else {
+  Step "没有指定文件，重新发布当前站点"
+  $kind = 'site'
+}
 
 $title = ''
 $dateVal = Get-Date
@@ -161,7 +173,7 @@ elseif ($kind -eq 'image') {
 }
 
 # ---------- 2c. 其它文件 ----------
-else {
+elseif ($kind -eq 'file') {
   Step "上传附件：$($item.Name)"
   $dstDir = Join-Path $Root 'source\files'
   if (-not (Test-Path -LiteralPath $dstDir)) { New-Item -ItemType Directory -Path $dstDir -Force | Out-Null }
@@ -208,6 +220,7 @@ try {
   $msg = 'chore: 更新站点'
   if ($kind -eq 'article') { $msg = "post: $title" }
   elseif ($kind -eq 'image') { $msg = "asset: $($item.Name)" }
+  elseif ($kind -eq 'site') { $msg = 'chore: 重新发布站点' }
   else { $msg = "file: $($item.Name)" }
 
   $cout = & git commit -m $msg 2>&1
@@ -234,10 +247,13 @@ Write-Host ""
 Write-Host "========================================" -ForegroundColor Green
 if ($kind -eq 'article') { Write-Host "  文章已发布" -ForegroundColor Green }
 elseif ($kind -eq 'image') { Write-Host "  图片已上传" -ForegroundColor Green }
+elseif ($kind -eq 'site') { Write-Host "  站点已重新发布" -ForegroundColor Green }
 else { Write-Host "  文件已上传" -ForegroundColor Green }
-Write-Host ""
-Write-Host "  $resultUrl" -ForegroundColor White
-Write-Host "  （GitHub Pages 构建约 1 分钟后生效）" -ForegroundColor DarkGray
+if ($resultUrl) {
+  Write-Host ""
+  Write-Host "  $resultUrl" -ForegroundColor White
+  Write-Host "  （GitHub Pages 构建约 1 分钟后生效）" -ForegroundColor DarkGray
+}
 Write-Host "========================================" -ForegroundColor Green
 
 if (-not $NoPause) { Write-Host ""; [void](Read-Host "按回车关闭") }
