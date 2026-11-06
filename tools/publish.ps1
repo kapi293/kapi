@@ -145,7 +145,7 @@ if ($kind -eq 'article') {
     Ok "已放入：source\_posts\$slug.md"
   }
 
-  $resultUrl = "http://kapi403.top/" + $dateVal.ToString('yyyy/MM/dd') + "/$slug/"
+  $resultUrl = "https://kapi403.top/" + $dateVal.ToString('yyyy/MM/dd') + "/$slug/"
 }
 
 # ---------- 2b. 图片素材 ----------
@@ -157,7 +157,7 @@ elseif ($kind -eq 'image') {
   Copy-Item -LiteralPath $item.FullName -Destination (Join-Path $dstDir $safeName) -Force
   Ok "已放入：source\img\uploads\$safeName"
   Info "文章里这样引用：![](/img/uploads/$safeName)"
-  $resultUrl = "http://kapi403.top/img/uploads/$safeName"
+  $resultUrl = "https://kapi403.top/img/uploads/$safeName"
 }
 
 # ---------- 2c. 其它文件 ----------
@@ -169,7 +169,7 @@ else {
   Copy-Item -LiteralPath $item.FullName -Destination (Join-Path $dstDir $safeName) -Force
   Ok "已放入：source\files\$safeName"
   Info "文章里这样链接：[下载](/files/$safeName)"
-  $resultUrl = "http://kapi403.top/files/$safeName"
+  $resultUrl = "https://kapi403.top/files/$safeName"
 }
 
 # ---------- 3. 构建 ----------
