@@ -2,8 +2,12 @@
 - class_name: 友情链接
   class_desc: 这些人，那些事
   link_list:
+    - name: FW的小站
+      link: https://farewane.site/
+      avatar: https://farewane.site/apple-touch-icon.png
+      descr: 机械电子工程本科在读，目标是成为有趣的灵魂
     - name: kapi 的博客
-      link: https://kapi403.github.io/
+      link: https://kapi403.top/
       avatar: /img/avatar.jpg
       descr: 本站
     - name: Butterfly 文档
